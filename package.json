@@ -1,0 +1,32 @@
+{
+  "name": "household-management",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Household Management System - Budget planning and generator maintenance tracking",
+  "author": "rpabo",
+  "license": "MIT",
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean && rimraf node_modules",
+    "db:generate": "npm run db:generate --workspace=@hms/database",
+    "db:migrate": "npm run db:migrate --workspace=@hms/database",
+    "db:studio": "npm run db:studio --workspace=@hms/database"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "packageManager": "npm@10.0.0"
+}

@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  hms-api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:/data/hms.db
+      - JWT_SECRET=${JWT_SECRET}
+      - BACKUP_PROVIDER=${BACKUP_PROVIDER:-local}
+    volumes:
+      - hms-data:/data
+      - hms-backups:/backups
+    restart: unless-stopped
+
+volumes:
+  hms-data:
+    name: hms-database
+  hms-backups:
+    name: hms-backups

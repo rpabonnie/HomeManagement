@@ -25,6 +25,12 @@
     "rimraf": "^5.0.0",
     "typescript": "^5.4.0"
   },
+  "overrides": {
+    "@rollup/plugin-replace": "^6.0.0",
+    "magic-string": "^0.30.0",
+    "source-map": "^0.7.6",
+    "esbuild": "^0.25.0"
+  },
   "engines": {
     "node": ">=20.0.0"
   },

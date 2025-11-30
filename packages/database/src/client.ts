@@ -1,18 +1,13 @@
-import { drizzle } from 'drizzle-orm/better-sqlite3';
-import Database from 'better-sqlite3';
-import * as schema from './schema';
+/**
+ * Database Client
+ * 
+ * Note: Database implementation will be configured separately.
+ * This module exports a placeholder for the database connection.
+ * The actual database setup will be done when configuring the environment.
+ */
 
-// Database path from environment or default
-const dbPath = process.env.DATABASE_URL?.replace('file:', '') || './data/hms.db';
-
-// Create database connection
-const sqlite = new Database(dbPath);
-
-// Enable WAL mode for better concurrency
-sqlite.pragma('journal_mode = WAL');
-
-// Create Drizzle instance
-export const db = drizzle(sqlite, { schema });
-
-// Export for direct access if needed
-export { sqlite };
+// Placeholder export - actual implementation depends on runtime environment
+export const dbConfig = {
+  dialect: 'sqlite' as const,
+  defaultPath: './data/hms.db',
+};

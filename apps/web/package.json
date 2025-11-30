@@ -14,7 +14,7 @@
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "react-router-dom": "^6.0.0",
-    "@hms/validation": "workspace:*"
+    "@hms/validation": "*"
   },
   "devDependencies": {
     "@types/react": "^18.3.0",

@@ -26,6 +26,34 @@ This project follows **Test-Driven Development (TDD)**. When implementing any re
 - **Each test should test ONE thing** - keep tests focused and isolated
 - **Tests must be deterministic** - no flaky tests allowed
 
+## Package Management
+
+### Node.js Version
+- **Always use the latest Node.js LTS version** - Currently Node.js 24+
+- Update the `engines.node` field in root `package.json` when a new LTS is released
+
+### Dependency Updates
+- **Always strive to use the latest stable versions** of all direct dependencies
+- Check for updates regularly using `npm outdated`
+- For **transitive dependencies** (dependencies of dependencies):
+  - If the main package is on its latest version but has outdated transitive deps, use `overrides` in root `package.json` to force newer versions
+  - Do NOT override transitive deps if it would break the main package
+- **Never use deprecated packages** - find modern alternatives
+
+### Current Package Versions (as of December 2025)
+| Package | Version | Location |
+|---------|---------|----------|
+| turbo | ^2.6.0 | root |
+| typescript | ^5.9.0 | all |
+| hono | ^4.10.0 | apps/api |
+| drizzle-orm | ^0.44.0 | apps/api, packages/database |
+| drizzle-kit | ^0.31.0 | packages/database |
+| react | ^19.2.0 | apps/web |
+| vite | ^7.2.0 | apps/web |
+| tailwindcss | ^4.1.0 | apps/web |
+| @tailwindcss/postcss | ^4.1.0 | apps/web |
+| zod | ^3.25.0 | apps/api, packages/validation |
+
 ## Architecture Rules
 
 1. **Do NOT suggest microservices patterns** - this is intentionally a monolith

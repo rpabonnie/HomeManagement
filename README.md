@@ -77,6 +77,7 @@ docker-compose logs -f
 
 See the `/docs` folder for detailed documentation:
 
+- **[Project Concepts & Patterns Guide](docs/project-concepts-and-patterns.md)** - Educational guide explaining the technologies, patterns, and architectural decisions
 - [Initial Research](docs/initial-research.md)
 - [Research Summary & Analysis](docs/research-summary-and-analysis.md)
 - [Feasibility Analysis & Architecture](docs/feasibility-analysis-and-architecture.md)

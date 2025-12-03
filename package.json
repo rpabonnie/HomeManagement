@@ -6,33 +6,34 @@
   "author": "rpabo",
   "license": "MIT",
   "type": "module",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "clean": "turbo run clean && rimraf node_modules",
-    "db:generate": "npm run db:generate --workspace=@hms/database",
-    "db:migrate": "npm run db:migrate --workspace=@hms/database",
-    "db:studio": "npm run db:studio --workspace=@hms/database"
+    "db:generate": "pnpm --filter @hms/database db:generate",
+    "db:migrate": "pnpm --filter @hms/database db:migrate",
+    "db:studio": "pnpm --filter @hms/database db:studio"
   },
   "devDependencies": {
-    "turbo": "^2.6.0",
     "rimraf": "^6.0.0",
+    "turbo": "^2.6.0",
     "typescript": "^5.9.0"
   },
-  "overrides": {
-    "@rollup/plugin-replace": "^6.0.0",
-    "magic-string": "^0.30.0",
-    "source-map": "^0.7.6",
-    "esbuild": "^0.25.0"
+  "pnpm": {
+    "overrides": {
+      "@rollup/plugin-replace": "^6.0.0",
+      "magic-string": "^0.30.0",
+      "source-map": "^0.7.6",
+      "esbuild": "^0.25.0"
+    },
+    "ignoredBuiltDependencies": [
+      "esbuild"
+    ]
   },
   "engines": {
     "node": ">=24.0.0"
   },
-  "packageManager": "npm@11.0.0"
+  "packageManager": "pnpm@10.11.0"
 }

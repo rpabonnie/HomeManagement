@@ -5,3 +5,8 @@ export const example = sqliteTable('example', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   name: text('name').notNull(),
 });
+
+export const generators = sqliteTable('generators', {
+  id: integer
+
+});

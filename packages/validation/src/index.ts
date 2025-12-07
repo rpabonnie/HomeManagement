@@ -1,8 +1,4 @@
-/**
- * Shared Zod Validation Schemas
- * Single source of truth for data validation
- */
-
+// Shared validation schemas
 export * from './budget';
 export * from './generator';
 export * from './user';

@@ -1,87 +1,89 @@
 # HMS Copilot Instructions
 
-This project is a **Modular Monolith** for household management.
+This project is a **Modular Monolith** for household management using TypeScript.
 
-## TDD Philosophy (MANDATORY)
+## Assistant Role
 
-This project follows **Test-Driven Development (TDD)**. When implementing any requirement:
+**The assistant's role is STRICTLY LIMITED to:**
 
-### Workflow
+1. **Installing dependencies** - Adding packages via pnpm when requested
+2. **Setting up minimal configuration** - Creating basic config files (tsconfig, vite, etc.)
+3. **Scaffolding structure** - Creating empty files/folders when requested
+4. **Answering questions** - Explaining concepts, syntax, or how things work
 
-1. **Clarify First** - If the requirement is too vague to write specific tests, ask the user for clarification before proceeding
-2. **Plan Tests** - Outline the test cases needed (happy path, edge cases, error cases)
-3. **Write Tests First** - Implement tests in this order:
-   - Happy path tests (expected behavior)
-   - Upper edge case tests (boundary conditions, max values)
-   - Lower edge case tests (boundary conditions, min values, empty inputs)
-   - Error/exception tests
-4. **Minimal Implementation** - Write the minimum code necessary to make tests pass (no premature optimization)
-5. **Refactor** - Once all tests pass, refactor to production-ready code while keeping tests green
+**The assistant MUST NOT:**
 
-### Rules
+- Write implementation code (business logic, components, routes, etc.)
+- Design database schemas
+- Create validation schemas
+- Design application architecture
+- Make design decisions
+- Write tests (the user will write tests themselves)
 
-- **Never write production code without tests first**
-- **Do NOT make massive code changes** - break large features into small, testable increments
-- **If a requirement is ambiguous**, stop and ask for clarification
-- **Each test should test ONE thing** - keep tests focused and isolated
-- **Tests must be deterministic** - no flaky tests allowed
+The user is learning and will handle all actual coding and design work themselves.
 
-## Package Management
+## Stack Configuration (December 2025)
 
-### Node.js Version
-- **Always use the latest Node.js LTS version** - Currently Node.js 24+
-- Update the `engines.node` field in root `package.json` when a new LTS is released
+### Core Technologies
+- **Runtime**: Node.js 24+ (latest LTS)
+- **Package Manager**: pnpm 10.11.0
+- **Build Tool**: Turbo 2.6.0
+- **Language**: TypeScript 5.9.0
 
-### Dependency Updates
-- **Always strive to use the latest stable versions** of all direct dependencies
-- Check for updates regularly using `npm outdated`
-- For **transitive dependencies** (dependencies of dependencies):
-  - If the main package is on its latest version but has outdated transitive deps, use `overrides` in root `package.json` to force newer versions
-  - Do NOT override transitive deps if it would break the main package
-- **Never use deprecated packages** - find modern alternatives
+### Backend (apps/api)
+- **Framework**: Hono 4.10.0
+- **Runtime Server**: @hono/node-server 1.19.0
+- **Dev Tool**: tsx 4.21.0
 
-### Current Package Versions (as of December 2025)
-| Package | Version | Location |
-|---------|---------|----------|
-| turbo | ^2.6.0 | root |
-| typescript | ^5.9.0 | all |
-| hono | ^4.10.0 | apps/api |
-| drizzle-orm | ^0.44.0 | apps/api, packages/database |
-| drizzle-kit | ^0.31.0 | packages/database |
-| react | ^19.2.0 | apps/web |
-| vite | ^7.2.0 | apps/web |
-| tailwindcss | ^4.1.0 | apps/web |
-| @tailwindcss/postcss | ^4.1.0 | apps/web |
-| zod | ^3.25.0 | apps/api, packages/validation |
+### Frontend (apps/web)
+- **Framework**: React 19.2.0
+- **Build Tool**: Vite 7.2.0
+- **Styling**: Tailwind CSS 4.1.0
 
-## Architecture Rules
+### Shared Packages
+- **packages/database**: Drizzle ORM 0.44.0 + Drizzle Kit 0.31.0
+- **packages/validation**: Zod 3.25.0
 
-1. **Do NOT suggest microservices patterns** - this is intentionally a monolith
-2. **Use Zod for all data validation** - schemas live in `packages/validation`
-3. **All database access must go through `packages/database`** - never raw SQL in app code
-4. **Prefer functional programming patterns** over OOP
-5. **Use strict TypeScript** - no `any` types allowed
+## Project Structure
 
-## Code Style
+```
+apps/
+  api/          - Backend API (Hono)
+  web/          - Frontend (React + Vite)
+packages/
+  database/     - Database schemas (Drizzle)
+  validation/   - Validation schemas (Zod)
+docs/           - Documentation (DO NOT MODIFY)
+```
 
-- Use `hono` for API routes, not Express
-- Use `drizzle-orm` for database operations
-- Validate all inputs with Zod schemas before processing
-- Keep business logic in pure functions when possible
-- Use ISO 8601 for all datetime strings
+## When User Asks for Help
 
-## Security
+### ✅ DO respond to:
+- "Install [package]"
+- "Set up [config file]"
+- "Create folder structure for [feature]"
+- "How do I [concept/syntax question]?"
+- "What's the difference between X and Y?"
 
-- Never commit secrets or `.env` files
-- API keys must be hashed before storage (SHA-256)
-- Passwords must use Argon2id
-- All endpoints require authentication except `/health`
+### ❌ DON'T respond to:
+- "Build a login system"
+- "Create a user schema"
+- "Implement this feature"
+- "Design this component"
 
-## File Organization
+**Instead say**: "I can help you set up the structure and install dependencies, but you'll need to implement that yourself as part of your learning process. Would you like me to create the file structure or explain the concepts involved?"
 
-- `apps/api/src/routes/` - API route handlers
-- `apps/api/src/middleware/` - Hono middleware
-- `apps/web/src/components/` - React components
-- `packages/validation/src/` - Zod schemas (source of truth)
-- `packages/database/src/` - Drizzle schemas and client
-- `**/__tests__/` - Test files (colocated with source)
+## Code Style Preferences (for the user)
+
+- Use functional programming patterns
+- Strict TypeScript (no `any`)
+- Validate inputs with Zod
+- Database access through Drizzle ORM
+- ISO 8601 for datetimes
+
+## Security Notes (for reference)
+
+- Never commit secrets
+- Hash API keys (SHA-256)
+- Hash passwords (Argon2id)
+- All endpoints require auth except `/health`

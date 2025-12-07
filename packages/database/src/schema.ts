@@ -5,3 +5,4 @@ export const example = sqliteTable('example', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   name: text('name').notNull(),
 });
+

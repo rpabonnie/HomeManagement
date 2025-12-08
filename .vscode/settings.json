@@ -1,3 +1,5 @@
 {
-    "github.copilot.editor.enableAutoCompletions": false
+    "github.copilot.nextEditSuggestions.enabled": false,
+    "continue.enableTabAutocomplete": false,
+    "continue.enableNextEdit": false
 }
